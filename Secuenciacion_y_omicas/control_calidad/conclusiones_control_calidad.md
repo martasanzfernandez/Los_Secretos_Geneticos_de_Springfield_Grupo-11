@@ -1,0 +1,1 @@
+Aunque las lecturas presentan una buena calidad para continuar con el análisis, se realiza un trimming de las lecturas con Trimmomatic, para eliminar posibles restos de adaptadores y bases de menor calidad para obtener unos datos mas homogéneos en los análisis posteriores de cuantificación con Salmon y de expresión génica mediante DESeq2 y EdgeR.
