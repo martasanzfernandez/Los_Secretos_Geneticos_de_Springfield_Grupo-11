@@ -1,1 +1,3 @@
-
+Se muestra un ejemplo de los FastQC de las muestras que se han pasado por Trimmomatic.
+Aparece en los archivos la descripción paired ya que Trimmomatic mantiene la coherencia 
+entre pares.
