@@ -1,0 +1,2 @@
+En el script, se muestra el código usado para generar los archivos donde se eliminan adaptores, bases de mala calidad y se han filtrado las lecturas cortas o de mala calidad.
+Va desde la transformación de esos datos gracias a Trimmomatic como la visualización de si esos datos han mejorado su calidad que para eso usaremos FastQC y MultiQC

@@ -1,0 +1,22 @@
+#Con el siguiente código activado en canda junto con Linux, tomamos los datos en formato fasta y se procesar para eliminar lo descrito a través de Trimmomatic. Este código se usará para cada uno de las muestras (LisaSimpson, MaggieSimpson, Marge Simpson, PattyBouvier y SelmaBouvier).
+
+trimmomatic PE \
+  -threads 8 \
+  data/raw/BartSimpson_R1.fastq.gz data/raw/BartSimpson_R2.fastq.gz \
+  data/trimmedBartSimpson_R1_paired.fastq.gz /dev/ null \
+  data/trimmedBartSimpson_R2_paired.fastq.gz /dev/ null \
+  ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 \
+  LEADING:3 \
+  TRAILING:3 \
+  SLIDINGWINDOW:4:20 \
+  MINLEN:36
+
+Una vez tenemos los archivos generados por Trimmomatic, tenemos que ver la informaciónn de calidad de dichas muestras. Por eso utilizamos FastQC y MultiQC.
+
+#FASTQC
+
+fastqc BartSimpson_R1_paired.fastq.gz BartSimpson_R2_paired.fastq.gz -o fastqc_post/
+
+#MULTIQC
+
+multiqc . -o multiqc_report/
