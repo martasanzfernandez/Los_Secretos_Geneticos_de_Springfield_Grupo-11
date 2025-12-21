@@ -1,0 +1,42 @@
+#creamos entorno conda con el canal bioconda y el alineador Salmon
+(base) maria@maria-VirtualBox:~$ conda activate rnaseq -c bioconda salmon
+
+#construimos el índice (dentro de la carpeta RNA-Seq)
+    #numero de k-meros 31 porque nuestras lecturas son de más de 75 pb (~150pb)
+(rnaseq) maria@maria-VirtualBox:~/RNA-Seq$ salmon index -t Referencia.fasta -i salmon_index -k 31
+
+
+#comprobamos que está el fichero del índice
+(rnaseq) maria@maria-VirtualBox:~/RNA-Seq$ ls
+Data_raw  Pseudoalineamiento.txt  Referencia.fasta  salmon_index
+Fastp     QC_Trimmed              Salmon            Trimmed
+
+ 
+#Pseudoalineamiento 
+   #-l A: detección automática del tipo de librería de las lecturas
+   # -1 y -2 archivos de lecturas (paired-end)
+   #--validateMappings alineamiento más sensible
+   
+(rnaseq) maria@maria-VirtualBox:~/RNA-Seq$ salmon quant -i salmon_index -l A -1 Trimmed/BartSimpson_R1_paired.fastq.gz -2 Trimmed/BartSimpson_R2_paired.fastq.gz --validateMappings -p 8 -o Salmon/BartSimpson
+
+(rnaseq) maria@maria-VirtualBox:~/RNA-Seq$ salmon quant -i salmon_index -l A -1 Trimmed/LisaSimpson_R1_paired.fastq.gz -2 Trimmed/LisaSimpson_R2_paired.fastq.gz --validateMappings -p 8 -o Salmon/LisaSimpson
+
+(rnaseq) maria@maria-VirtualBox:~/RNA-Seq$ salmon quant -i salmon_index -l A -1 Trimmed/MaggieSimpson_R1_paired.fastq.gz -2 Trimmed//MaggieSimpson_R2_paired.fastq.gz --validateMappings -p 8 -o Salmon/MaggieSimpson
+
+(rnaseq) maria@maria-VirtualBox:~/RNA-Seq$ salmon quant -i salmon_index -l A -1 Trimmed/MargeSimpson_R1_paired.fastq.gz -2 Trimmed/MargeSimpson_R2_paired.fastq.gz --validateMappings -p 8 -o Salmon/MargeSimpson
+
+(rnaseq) maria@maria-VirtualBox:~/RNA-Seq$ salmon quant -i salmon_index -l A -1 Trimmed/PattyBouvier_R1_paired.fastq.gz -2 Trimmed/PattyBouvier_R2_paired.fastq.gz --validateMappings -p 8 -o Salmon/PattyBouvier
+
+(rnaseq) maria@maria-VirtualBox:~/RNA-Seq$ salmon quant -i salmon_index -l A -1 Trimmed/SelmaBouvier_R1_paired.fastq.gz -2 Trimmed/SelmaBouvier_R2_paired.fastq.gz --validateMappings -p 8 -o Salmon/SelmaBouvier
+
+
+ #el porcentaje de mapeo es del 100% para todas las muestras
+
+
+#Comprobamos que están todos los ficheros de las muestras
+(rnaseq) maria@maria-VirtualBox:~/RNA-Seq$ cd Salmon
+(rnaseq) maria@maria-VirtualBox:~/RNA-Seq/Salmon$ ls
+BartSimpson  MaggieSimpson  PattyBouvier
+LisaSimpson  MargeSimpson   SelmaBouvier
+
+
